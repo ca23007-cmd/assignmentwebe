@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parking Space List Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="parking.css">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo-box">
+      <img src="images/petakom.png" alt="Logo">
+    </div>
+
+    <nav class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Membership</a>
+      <a href="#" class="nav-link active">Parking Booking</a>
+      <a href="#" class="nav-link">Parking Summon</a>
+    </nav>
+  </div>
+
+  <div class="nav-right">
+    <div class="avatar">ST</div>
+    <a href="#" class="logout-link">Log Out</a>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- TITLE -->
+  <div class="page-header">
+    <h2>Parking Space List Page</h2>
+    <p>Browse all parking spaces and check availability.</p>
+  </div>
+
+  <!-- FILTER BOX -->
+  <div class="filter-panel">
+    <h3>View Parking List</h3>
+
+    <div class="filter-row">
+      <div class="filter-field">
+        <label>Date</label>
+        <input type="date">
+      </div>
+
+      <div class="filter-field">
+        <label>Time</label>
+        <input type="time">
+      </div>
+    </div>
+
+    <button class="filter-btn">Filter</button>
+  </div>
+
+  <!-- PARKING LIST -->
+  <div class="parking-list-wrapper">
+
+    <!-- Column 1 -->
+    <div class="parking-column">
+      <h4>Parking Name</h4>
+      <div class="parking-item">FK Motorcycle A</div>
+      <div class="parking-item">FK Motorcycle B</div>
+      <div class="parking-item">FK Car A</div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="parking-column">
+      <h4>Parking Status</h4>
+      <div class="parking-item status available">Available</div>
+      <div class="parking-item status full">Full</div>
+      <div class="parking-item status available">Available</div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="parking-column">
+      <h4>Action</h4>
+      <button class="action-btn book">Book Now</button>
+      <button class="action-btn details">View Details</button>
+      <button class="action-btn book">Book Now</button>
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
