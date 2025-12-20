@@ -1,0 +1,185 @@
+<?php
+session_start();
+
+// Only safety staff
+if (!isset($_SESSION["Role"]) || $_SESSION["Role"] !== "safety staff") {
+    header("Location: login.php");
+    exit;
+}
+
+$name = $_SESSION["Name"] ?? "Staff";
+$initials = strtoupper(substr($name, 0, 2));
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Issue Summon | FKPark</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* SAME STYLE AS DASHBOARD */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui, Arial;
+}
+
+body{
+  background:linear-gradient(135deg,#ecfeff,#e0f2fe,#dbeafe);
+  min-height:100vh;
+}
+
+.navbar{
+  background:#fff;
+  padding:12px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 14px rgba(37,99,235,0.15);
+  border-bottom:1px solid #bfdbfe;
+}
+
+.logo-box img{height:40px;}
+
+.nav-links a{
+  margin:0 8px;
+  text-decoration:none;
+  padding:7px 15px;
+  border-radius:30px;
+  color:#4b5563;
+}
+.nav-link.active{
+  background:#1d4ed8;
+  color:#fff !important;
+}
+
+.avatar{
+  width:38px;height:38px;
+  border-radius:50%;
+  border:2px solid #60a5fa;
+  background:#dbeafe;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+  color:#1d4ed8;
+}
+
+.logout-link{
+  font-size:12px;
+  color:#7f1d1d;
+  text-decoration:none;
+}
+
+.main{
+  padding:30px 40px;
+}
+
+.page-title{
+  font-size:24px;
+  font-weight:700;
+  color:#1e3a8a;
+  margin-bottom:20px;
+}
+
+/* FORM CARD */
+.form-card{
+  background:#ffffff;
+  border:1px solid #bfdbfe;
+  border-radius:20px;
+  max-width:550px;
+  margin:auto;
+  padding:30px;
+  box-shadow:0 10px 25px rgba(37,99,235,0.20);
+}
+
+label{
+  font-weight:600;
+  color:#1e40af;
+  font-size:14px;
+}
+
+input, select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #bfdbfe;
+  margin:10px 0 18px;
+  background:#f8fafc;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  font-weight:700;
+  background:#1d4ed8;
+  border:none;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+button:hover{
+  background:#1e40af;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+  <div class="nav-left" style="display:flex;align-items:center;gap:20px;">
+    <div class="logo-box">
+      <img src="pic/pentakom.png">
+    </div>
+
+    <nav class="nav-links">
+      <a href="staff_dashboard.php" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Membership</a>
+      <a href="issue_summon.php" class="nav-link active">Issue summon</a>
+      <a href="summon_history.php" class="nav-link">Summon history</a>
+      <a href="demerit_points.php" class="nav-link">Demerit points</a>
+    </nav>
+  </div>
+
+  <div class="nav-right" style="display:flex;align-items:center;gap:10px;">
+    <div class="avatar"><?= $initials ?></div>
+    <a href="logout.php" class="logout-link">LOG OUT</a>
+  </div>
+</header>
+
+<main class="main">
+    <h2 class="page-title">Issue Traffic Summon</h2>
+
+    <div class="form-card">
+
+        <form action="save_summon.php" method="POST">
+            
+            <label>Vehicle Plate Number</label>
+            <input type="text" name="plate" required>
+
+            <label>Violation Type</label>
+            <select name="violation" required>
+                <option value="">Select Violation</option>
+                <option>Parking Violation (10 pts)</option>
+                <option>Traffic Rules (15 pts)</option>
+                <option>Accident Caused (20 pts)</option>
+            </select>
+
+            <label>Location</label>
+            <input type="text" name="location" required>
+
+            <label>Date & Time</label>
+            <input type="datetime-local" name="datetime" required>
+
+            <button type="submit">Issue Summon</button>
+
+        </form>
+
+    </div>
+</main>
+
+</body>
+</html>

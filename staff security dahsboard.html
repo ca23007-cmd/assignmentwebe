@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Security Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      height: 100vh;
+      display: flex;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      width: 230px;
+      background-color: #2f3e46;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar img {
+      width: 120px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .menu a {
+      display: block;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .menu a:hover {
+      background-color: #354f52;
+    }
+
+    /* ===== Main Content ===== */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: #2f3e46;
+    }
+
+    /* ===== Table ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #cad2c5;
+    }
+
+    .status-safe {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-alert {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Sidebar ===== -->
+  <div class="sidebar">
+    <img src="logo.png" alt="Logo">
+    <h2>Security Staff</h2>
+    <div class="menu">
+      <a href="#">Dashboard</a>
+      <a href="#">Incidents</a>
+      <a href="#">Patrol Logs</a>
+      <a href="#">CCTV Monitoring</a>
+      <a href="#">Reports</a>
+      <a href="#">Logout</a>
+    </div>
+  </div>
+
+  <!-- ===== Main Content ===== -->
+  <div class="main">
+    <div class="header">Security Dashboard</div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Active Guards</h3>
+        <p>8</p>
+      </div>
+      <div class="card">
+        <h3>Incidents Today</h3>
+        <p>2</p>
+      </div>
+      <div class="card">
+        <h3>Areas Monitored</h3>
+        <p>12</p>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table>
+      <tr>
+        <th>Area</th>
+        <th>Status</th>
+        <th>Last Check</th>
+      </tr>
+      <tr>
+        <td>Parking Lot A</td>
+        <td class="status-safe">Safe</td>
+        <td>10:30 AM</td>
+      </tr>
+      <tr>
+        <td>Main Gate</td>
+        <td class="status-alert">Alert</td>
+        <td>10:45 AM</td>
+      </tr>
+      <tr>
+        <td>Building B</td>
+        <td class="status-safe">Safe</td>
+        <td>11:00 AM</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
