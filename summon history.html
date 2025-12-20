@@ -1,0 +1,153 @@
+<?php
+session_start();
+// Only safety staff
+if (!isset($_SESSION["Role"]) || $_SESSION["Role"] !== "safety staff") {
+    header("Location: login.php");
+    exit;
+}
+$name = $_SESSION["Name"] ?? "Staff";
+$initials = strtoupper(substr($name, 0, 2));
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Summon History | FKPark</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,},
+  body{background:linear-gradient(135deg,#ecfeff,#e0f2fe,#dbeafe);min-height:100vh;color:#0f172a}
+  /* Navbar */
+  .navbar{background:#fff;padding:12px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #bfdbfe;box-shadow:0 4px 14px rgba(37,99,235,0.12)}
+  .logo-box img{height:40px}
+  .nav-links{display:flex;gap:10px}
+  .nav-links a{padding:7px 14px;border-radius:999px;text-decoration:none;color:#475569}
+  .nav-links a.active{background:#1d4ed8;color:#fff}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .avatar{width:38px;height:38px;border-radius:50%;border:2px solid #60a5fa;background:#dbeafe;display:flex;align-items:center;justify-content:center;color:#1d4ed8;font-weight:700}
+  .logout-link{color:#7f1d1d;text-decoration:none;font-size:13px}
+  /* Main */
+  .main{padding:26px 40px}
+  .page-header h2{font-size:22px;color:#1e3a8a;margin-bottom:6px}
+  .page-header p{color:#6b7280;margin-bottom:18px}
+  /* Card */
+  .card{background:#fff;border-radius:12px;border:1px solid #bfdbfe;padding:18px;box-shadow:0 8px 20px rgba(37,99,235,0.08)}
+  .search-row{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+  .input, select, button{padding:10px;border-radius:8px;border:1px solid #c7ddff;background:#f8fafc}
+  .input{min-width:220px;flex:1}
+  .btn-primary{background:#1d4ed8;color:#fff;border:none;cursor:pointer;padding:10px 14px;border-radius:8px}
+  .table-wrap{overflow:auto;margin-top:10px}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:10px;border-bottom:1px solid #eef2ff;text-align:left;color:#0f172a}
+  th{font-weight:700;background:transparent}
+  .small-btn{padding:6px 10px;border-radius:8px;border:1px solid #c7ddff;background:#fff;cursor:pointer}
+  /* Responsive */
+  @media(max-width:900px){
+    .main{padding:20px}
+    .search-row{flex-direction:column;align-items:stretch}
+  }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div style="display:flex;align-items:center;gap:20px">
+    <div class="logo-box"><img src="pic/pentakom.png" alt="UMP x PENTAKOM"></div>
+    <nav class="nav-links">
+      <a href="staff_dashboard.php">Dashboard</a>
+      <a href="#">Membership</a>
+      <a href="issue_summon.php">Issue summon</a>
+      <a href="summon_history.php" class="active">Summon history</a>
+      <a href="demerit_points.php">Demerit points</a>
+    </nav>
+  </div>
+
+  <div class="nav-right">
+    <div class="avatar"><?= htmlspecialchars($initials) ?></div>
+    <a class="logout-link" href="logout.php">LOG OUT</a>
+  </div>
+</header>
+
+<main class="main">
+  <div class="page-header">
+    <h2>Summon History</h2>
+    <p>Search and review issued summons. Use filters to refine results.</p>
+  </div>
+
+  <div class="card">
+    <div class="search-row">
+      <input class="input" type="text" id="q" placeholder="Search by plate number or summon ID">
+      <select id="filterType">
+        <option value="">All Violation Types</option>
+        <option>Parking Violation</option>
+        <option>Traffic Rules</option>
+        <option>Accident Caused</option>
+      </select>
+      <input class="input" type="date" id="fromDate" style="max-width:160px">
+      <input class="input" type="date" id="toDate" style="max-width:160px">
+      <button class="btn-primary" onclick="applyFilter()">Filter</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="summonTable" class="card">
+        <thead>
+          <tr>
+            <th>Summon ID</th>
+            <th>Plate</th>
+            <th>Owner</th>
+            <th>Type</th>
+            <th>Points</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tbodySummons">
+          <!-- Dummy rows (replace with server data) -->
+          <tr>
+            <td>SM001</td>
+            <td>VAB1234</td>
+            <td>Ahmad A.</td>
+            <td>Parking Violation</td>
+            <td>10</td>
+            <td>2025-01-15</td>
+            <td>Unpaid</td>
+            <td><button class="small-btn" onclick="viewSummon('SM001')">View</button></td>
+          </tr>
+          <tr>
+            <td>SM002</td>
+            <td>WRT5566</td>
+            <td>Siti N.</td>
+            <td>Traffic Rules</td>
+            <td>15</td>
+            <td>2025-01-20</td>
+            <td>Paid</td>
+            <td><button class="small-btn" onclick="viewSummon('SM002')">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+  function applyFilter(){
+    // Placeholder filter logic for demo. Replace with server-side in production.
+    const q = document.getElementById('q').value.toLowerCase();
+    const type = document.getElementById('filterType').value.toLowerCase();
+    const tbody = document.getElementById('tbodySummons');
+    for(const row of tbody.rows){
+      const text = row.textContent.toLowerCase();
+      let visible = true;
+      if(q && !text.includes(q)) visible = false;
+      if(type && !text.includes(type)) visible = false;
+      row.style.display = visible ? '' : 'none';
+    }
+  }
+  function viewSummon(id){
+    alert('Open summon details: ' + id + '\n(Implement link/modal to show details)');
+  }
+</script>
+
+</body>
+</html>
