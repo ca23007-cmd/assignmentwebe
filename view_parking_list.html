@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Parking Space List Page</title>
+<title>Parking Space List</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="parking.css">
@@ -36,7 +36,7 @@
 
   <!-- TITLE -->
   <div class="page-header">
-    <h2>Parking Space List Page</h2>
+    <h2>Parking Space List</h2>
     <p>Browse all parking spaces and check availability.</p>
   </div>
 
@@ -60,33 +60,43 @@
   </div>
 
   <!-- PARKING LIST -->
-  <div class="parking-list-wrapper">
+ <div class="parking-table">
 
-    <!-- Column 1 -->
-    <div class="parking-column">
-      <h4>Parking Name</h4>
-      <div class="parking-item">FK Motorcycle A</div>
-      <div class="parking-item">FK Motorcycle B</div>
-      <div class="parking-item">FK Car A</div>
-    </div>
-
-    <!-- Column 2 -->
-    <div class="parking-column">
-      <h4>Parking Status</h4>
-      <div class="parking-item status available">Available</div>
-      <div class="parking-item status full">Full</div>
-      <div class="parking-item status available">Available</div>
-    </div>
-
-    <!-- Column 3 -->
-    <div class="parking-column">
-      <h4>Action</h4>
-      <button class="action-btn book">Book Now</button>
-      <button class="action-btn details">View Details</button>
-      <button class="action-btn book">Book Now</button>
-    </div>
-
+  <!-- HEADER -->
+  <div class="parking-row header">
+    <div>Parking Name</div>
+    <div>Parking Status</div>
+    <div>Action</div>
   </div>
+
+  <!-- ROW 1 -->
+  <div class="parking-row">
+    <div class="parking-item">FK Motorcycle A</div>
+    <div class="parking-item status available">Available</div>
+    <div class="action-group">
+      <button class="action-btn book">Book Now</button>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="parking-row">
+    <div class="parking-item">FK Motorcycle B</div>
+    <div class="parking-item status full">Full</div>
+    <div class="action-group">
+      <button class="action-btn details">View Details</button>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="parking-row">
+    <div class="parking-item">FK Car A</div>
+    <div class="parking-item status available">Available</div>
+    <div class="action-group">
+      <button class="action-btn book">Book Now</button>
+    </div>
+  </div>
+
+</div>
 
 </main>
 
