@@ -2,47 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UMP X PETAKOM - Booking</title>
+    <title>Booking Form</title>
     <link rel="stylesheet" href="bookingform.css">
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="logo">
-            LOGO UMP X<br>PETAKOM
-        </div>
-
-        <div class="nav-links">
-            <span>Dashboard</span>
-            <span>Membership</span>
-            <span>Booking Parking</span>
-            <span>Parking Summon</span>
-        </div>
-
-        <div class="logout">
-            <br>LOG OUT
-        </div>
+    <header class="navbar">
+  <div class="nav-left">
+    <div class="logo-box">
+      <img src="images/petakom.png" alt="Logo">
     </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-label">
-            <br>Booking Form
-        </div>
+    <nav class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Membership</a>
+      <a href="#" class="nav-link active">Parking Booking</a>
+      <a href="#" class="nav-link">Parking Summon</a>
+    </nav>
+  </div>
 
+  <div class="nav-right">
+    <div class="avatar">ST</div>
+    <a href="#" class="logout-link">Log Out</a>
+  </div>
+</header>
+
+    <!-- Main Content -->
+      <div class="container">
         <div class="booking-box">
             <div class="booking-title">
-                <br>
-Booking Form
+                Booking Form
             </div>
 
             <form class="booking-form">
-                <input type="text" placeholder="Parking Space ID">
-                <input type="date">
-                <input type="time">
-                <input type="text" placeholder="Expected Duration">
-                <input type="text" placeholder="Car Plate Number">
+                <label for="spaceID">Parking Space ID</label>
+                <input id="spaceID" name="spaceID" type="text" placeholder="Parking Space ID" required>
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <div class="duration-row">
+                    <input type="number" id="duration" name="duration" min="1" placeholder="Expected Duration" required>
+                    <select id="durationUnit" name="durationUnit">
+                        <option value="minutes">Minutes</option>
+                        <option value="hours" selected>Hours</option>
+                    </select>
+                </div>
+                <input type="text" id="plate" name="plate" placeholder="Car Plate Number" maxlength="10"
+                pattern="[A-Z0-9\-]{1,10}" title="Use uppercase letters, numbers and dashes">
 
                 <div class="button-group">
                     <button type="button">Check Availability</button>
@@ -50,6 +56,7 @@ Booking Form
                 </div>
             </form>
         </div>
+      </div>
     </div>
 
 </body>
